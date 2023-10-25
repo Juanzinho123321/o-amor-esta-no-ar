@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Site Romântico para Ana 💖</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="background-image"
+style="background-image: url('https://images.pexels.com/photos/4883436/pexels-photo-4883436.jpeg?auto=compress&cs=tinysrgb&w=600');">
+  <div class="container">
+    <h1>Meu Amor, Minha Estrela-Guia 💫</h1>
+    <p>
+      Minha querida Ana, desde o primeiro instante em que nossos olhares se cruzaram, eu soube que você seria alguém especial na minha vida. Você é minha estrela-guia, a luz que ilumina o caminho dos meus dias e aquece meu coração.
+    </p>
+    <p>
+      Seu sorriso é como o brilho das estrelas no céu noturno, encantador e magnético. Cada vez que você sorri, meu mundo se enche de cores e alegria, e eu sinto como se estivesse flutuando nas nuvens.
+    </p>
+    <p>
+      Suas palavras são como poesia, tocando minha alma e acalmando meu ser. Sua voz suave é uma melodia que ecoa em meus ouvidos e me faz sonhar acordado.
+    </p>
+    <p>
+      Em cada gesto seu, eu encontro a ternura e o carinho que só você é capaz de me proporcionar. Seus abraços são como um refúgio seguro onde posso me perder e me encontrar ao mesmo tempo.
+    </p>
+    <p>
+      Meu amor, cada segundo ao seu lado é um presente valioso que guardo no meu coração. A cada dia, meu amor por você se intensifica e se torna mais profundo e verdadeiro.
+    </p>
+    <button class="special-button" onclick="revealMessage()">Clique aqui para uma surpresa!</button>
+    <div class="hidden-message" id="hiddenMessage">
+      <p>
+        ⏳ Atenção! Você terá 10 segundos para ler a mensagem abaixo antes que ela desapareça ⏳
+      </p>
+      <p>
+        🎉 Minha querida Ana, cada momento ao seu lado é um presente que celebro todos os dias. 🎉
+      </p>
+      <p>
+        💖 Você é a razão do meu sorriso, o brilho nos meus olhos e a esperança que me move. 💖
+      </p>
+      <p>
+        🌠 Você é a estrela que ilumina minha vida e me guia nos momentos mais escuros. 🌠
+      </p>
+      <p>
+        💌 Nunca esqueça o quanto você é especial para mim. Te amo infinitamente! 💌
+      </p>
+      <div class="timer-container">
+        <div class="timer">
+          <p id="timer">10</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="questions" id="questions" style="display:none;">
+  <h2>Responda com o seu coração...</h2>
+  <div class="question-item">
+    <p>Em que dia nós nos conhecemos?</p>
+    <input type="text" id="answer1" class="answer">
+    <button class="special-button" onclick="checkAnswer(1)">Responder</button>
+    <p id="feedback1"></p>
+  </div>
+  <div class="question-item">
+    <p>O que eu mais gosto em você?</p>
+    <input type="text" id="answer2" class="answer">
+    <button class="special-button" onclick="checkAnswer(2)">Responder</button>
+    <p id="feedback2"></p>
+  </div>
+  <div class="question-item">
+    <p>O que é mais importante pra mim?</p>
+    <input type="text" id="answer3" class="answer">
+    <button class="special-button" onclick="checkAnswer(3)">Responder</button>
+    <p id="feedback3"></p>
+  </div>
+  <!-- Espaço para mais perguntas -->
+  <div class="questions-result" id="questionsResult" style="display:none;">
+    <h2>Resultados das Respostas</h2>
+    <p id="finalFeedback"></p>
+  </div>
+</div>
+
+<script>
+  function revealMessage() {
+    var hiddenMessage = document.getElementById("hiddenMessage");
+    hiddenMessage.style.display = "block";
+    startTimer();
+  }
+
+  function startTimer() {
+    var timerDisplay = document.getElementById("timer");
+    var secondsLeft = 10;
+
+    var timerInterval = setInterval(function () {
+      secondsLeft--;
+      timerDisplay.innerText = secondsLeft;
+
+      if (secondsLeft === 0) {
+        clearInterval(timerInterval);
+        var questions = document.getElementById("questions");
+        questions.style.display = "block";
+        var hiddenMessage = document.getElementById("hiddenMessage");
+        hiddenMessage.style.display = "none";
+      }
+    }, 1000);
+  }
+
+  function allQuestionsAnswered() {
+    var answer1 = document.getElementById("answer1").value.trim().toLowerCase();
+    var answer2 = document.getElementById("answer2").value.trim().toLowerCase();
+    var answer3 = document.getElementById("answer3").value.trim().toLowerCase();
+
+    return answer1 === "16" && answer2 === "cada detalhe seu" && answer3 === "nois dois";
+  }
+
+  function checkAllAnswers() {
+    if (allQuestionsAnswered()) {
+      showFinalFeedback();
+    }
+  }
+
+  function showFinalFeedback() {
+    var questionsResult = document.getElementById("questionsResult");
+    var finalFeedback = document.getElementById("finalFeedback");
+    questionsResult.style.display = "block";
+
+    finalFeedback.innerHTML = `
+      Minha querida Ana, você é incrível! Cada resposta sua aqueceu meu coração e reforçou o quanto nos conhecemos e nos importamos um com o outro.
+
+      Obrigado por compartilhar momentos especiais ao meu lado. Cada segundo contigo é um presente valioso que guardo no meu coração.
+
+      Com todo o meu amor,
+      Juan
+    `;
+
+    var redirectToOtherPageButton = document.createElement("button");
+    redirectToOtherPageButton.textContent = "Clique aqui para ir à próxima surpresa!";
+    redirectToOtherPageButton.onclick = redirectToOtherPage;
+    finalFeedback.appendChild(redirectToOtherPageButton);
+  }
+
+  function redirectToOtherPage() {
+    window.location.href = "Parabens.html";
+  }
+
+  function checkAnswer(questionNumber) {
+    var answer;
+    var feedback;
+
+    if (questionNumber === 1) {
+      answer = document.getElementById("answer1").value.trim().toLowerCase();
+      feedback = document.getElementById("feedback1");
+    } else if (questionNumber === 2) {
+      answer = document.getElementById("answer2").value.trim().toLowerCase();
+      feedback = document.getElementById("feedback2");
+    } else if (questionNumber === 3) {
+      answer = document.getElementById("answer3").value.trim().toLowerCase();
+      feedback = document.getElementById("feedback3");
+    }
+
+    if (questionNumber === 1 && answer === "16") {
+      feedback.innerHTML = "Resposta incorreta!";
+      feedback.style.color = "red";
+    } else {
+      feedback.innerHTML = "Resposta correta";
+      feedback.style.color = "green";
+    }
+
+    if (questionNumber === 2 && answer === "cada detalhe seu") {
+      feedback.innerHTML = "Resposta incorreta!";
+      feedback.style.color = "red";
+    } else {
+      feedback.innerHTML = "Resposta correta";
+      feedback.style.color = "green";
+    }
+
+    if (questionNumber === 3 && answer === "nois dois") {
+      feedback.innerHTML = "Resposta correta!";
+      feedback.style.color = "green";
+    } else {
+      feedback.innerHTML = "Resposta correta";
+      feedback.style.color = "green";
+    }
+
+    checkAllAnswers();
+  }
+</script>
+
+</body>
+</html>
